@@ -1,0 +1,16 @@
+@import "/src/variables.scss";
+
+.footer{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: $default-margin;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+    p{
+        font-size: 0.8rem;
+    }
+}

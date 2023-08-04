@@ -1,0 +1,134 @@
+@import "/src/variables.scss";
+
+$rythm-bpm: 120;
+
+section.section {
+    height: 100vh;
+    // background-color: red;
+    padding: $default-margin;
+    
+    &.hero{
+        display: flex;
+        flex-direction: row;
+        .links{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-end;
+            // padding-bottom: 5rem;
+            // overflow: hidden;
+            h1,p {
+                font-size: 4rem;
+                text-transform: uppercase;
+                line-height: 0.95;
+                font-weight: 400;
+                font-style: normal;
+            }
+            h1 {
+                margin-bottom: 1rem;
+                // font-style: italic;
+                transform: skewX(30deg) translateX(0.5rem);
+            }
+            ul {
+                list-style: none;
+                margin: 0; padding: 0;
+                display: flex;
+                flex-direction: column;
+            }
+            span,i{
+                font-size: 1.25rem;
+                opacity: 0.8;
+            }
+        }
+
+        .logo-wrapper{
+            flex: 1;
+            // z-index: 0;
+            // position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            // overflow: hidden;
+            // animation: blink 5s step-end infinite; 
+            // @media screen and (max-width: $media-mobile-breakpoint) {
+            // &:after{
+            //     content: "";
+            //     position: absolute;
+            //     // left: 50%; top: 50%;
+            //     // transform: translate(-50%);
+            //     margin: auto;
+            //     width: 250px; height: 250px;
+            //     border-radius: 50%;
+            //     filter: blur(100px);
+            //     background-color: rgba(255, 255, 255, 0.233);
+            //     z-index: -9;
+            //     // animation: flashing-pulse calc(60s / $rythm-bpm) infinite linear;
+            // }
+            // }
+            .logo{
+                width: 100%;
+                max-width: 40rem;
+                // animation: logo-pulse 5s infinite;
+                // animation: logo-pulse-rythm-rotate calc(60s*2/$rythm-bpm) linear infinite; //bpm 1 bpm = 
+                // animation: logo-pulse-rythm calc(60s/$rythm-bpm) ease-out infinite; //bpm 1 bpm = 
+            }
+        }
+    }
+
+    &.music{
+        background-color: $background-color-D3;
+    }
+}   
+// $rythm-impact: calc(random($limit: 3));
+$rythm-impact: 1;
+
+@keyframes logo-pulse {
+    0%, 100% {
+        filter: blur(0px) brightness(1) contrast(1);
+    }
+
+    50% {
+        filter: blur(2px) brightness(2) contrast(1);
+    }
+}
+@keyframes logo-pulse-rythm-rotate {
+    $toned: max(calc($rythm-impact/ 2), 1);
+    0%, 24.9%, 50%, 74.9%, 100% {
+        filter: blur(0px) brightness(1) contrast(1);
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        filter: blur(2px*$toned) brightness(2*$rythm-impact) contrast(1);
+        transform: scale(1.05*$toned) rotate(3deg*$rythm-impact);
+    }
+
+    75% {
+        filter: blur(2px*$toned) brightness(2*$rythm-impact) contrast(1);
+        transform: scale(1.05*$toned) rotate(-3deg*$rythm-impact);
+    }
+}
+
+@keyframes flashing-pulse {
+    0%,49.9%,100% {
+        transform: scale(0.5)
+    }
+    50%{
+        transform: scale(1.5);
+    }
+}
+
+@keyframes blink {
+    0%, 13%, 15%, 23%, 31%, 44%, 47%, 74%, 77%, 85%, 91%, 100% {
+        opacity: 1;
+    }
+
+    13.1%, 14.9%, 23.1%, 30.9%, 44.1%, 46.9%, 74.1%, 76.9%, 85.1%, 90.9%{
+        opacity: 0;
+    }
+}
+
+// at 13, 74, 23, 85, 44
+// with 2, 3, 8, 6, 3
+// end 15, 77, 31, 91, 47

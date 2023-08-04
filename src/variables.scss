@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;0,1000;1,400&display=swap');
+
+
+/* COLORS */
+/*
+The deaper (D) the darker the color
+*/
+$background-color-D0: hsl(0, 0%, 28%);
+$background-color-D1: hsl(0, 0%, 14%);
+$background-color-D2: hsl(0, 0%, 7%);
+$background-color-D3: #3f1e99;
+$background-color-D3: #000000;
+// $background-color-D3: #831e57;
+// $background-color-D3: #08467c;
+// $background-color-D3: #02281b;
+// $background-color-D3: #000000;
+$accent-color: #ffffff;
+$text-color: #ccc;
+
+//mobile version 
+$media-mobile-breakpoint: 767px;
+@media sceen and (max-width: $media-mobile-breakpoint) {
+    
+}
+
+/* TOPBAR */
+$topbar-height: 5rem;
+$topbar-distance-between-items: .5rem;
+$topbar-fontsize: 0.9rem;
+$topbar-link-fontsize: 1.1rem;
+
+/* APP */
+$default-margin: 1rem;
+
+@media (prefers-color-scheme: light) {
+    $background-color-D1: #fff;
+    $background-color-D2: hsl(0, 0%, 93%);
+    $background-color-D3: hsl(0, 0%, 86%);
+    $text-color: black;
+}
+

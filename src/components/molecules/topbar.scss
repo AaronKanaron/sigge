@@ -1,0 +1,68 @@
+@import "../../variables.scss";
+
+.topbar-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    // height: $topbar-height;
+    z-index: 100;
+    &:before{
+        content: "";
+        position: absolute;
+        left: 0%; top: 0;
+        width: 100vw; height: 5rem;
+        // background: rgba($color: red, $alpha: 0.5);
+        backdrop-filter: blur(10px);
+        z-index: -99;
+        mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0, rgba(0,0,0,0) 100%);
+
+    }
+    // background: red;
+    //gradient mask top to bottom, it should be visible at the top and fade out at the bottom
+    .topbar {
+        //this shoudl not be masked
+
+        padding: 0 $default-margin;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: $default-margin;
+
+        h1,i {
+            font-size: $topbar-fontsize;
+        }
+
+        .left{
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            // padding-top: $default-margin;
+            // &:after{
+            //     content: "";
+            //     position: absolute;
+            //     top: 66.66665%; left: 0;
+            //     width: 100vw;
+            //     opacity: 0.1;
+            //     height: 2px;
+            //     background-color: white;
+            //     transform: translateY(-50%);
+            // }
+        }
+
+        ul{
+            justify-content: flex-end;
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: $topbar-distance-between-items;
+            padding-left: 0;
+
+            li{
+                font-size: $topbar-link-fontsize;
+            }
+        }
+    }
+}

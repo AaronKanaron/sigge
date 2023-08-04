@@ -1,0 +1,192 @@
+$cube-size: 200px;
+$face: $cube-size / 2;
+@import "../../variables.scss";
+
+:root{
+	// --scroll-distance: 0deg;
+}
+
+#cube {
+	--scroll-distance-to-deg: calc(var(--scroll-distance) * 360deg * 4);
+	width: $cube-size;
+	height: $cube-size;
+	transform-style: preserve-3d;
+
+	$cube-start-rotation-x: -30deg; //x1
+	$cube-start-rotation-y: 45deg;
+	$desired-end-rotation-cube-x: 30deg; //x2
+	$desired-end-rotation-cube-y: -135deg;
+	// $desired-end-rotation-cube-x: 12deg; //x2
+	// $desired-end-rotation-cube-y: 119deg;
+	// $cube-distance-between-points-x: abs($desired-end-rotation-cube-x - $cube-start-rotation-x); // 45, -30, 45+30 - works if one value or no values are negative, if two values are negative: -30, -47 = -30
+	// $x3: abs($cube-start-rotation-x);
+	// $x4: abs($desired-end-rotation-cube-x);
+
+	// $cube-distance-between-points-y: abs($desired-end-rotation-cube-y - $cube-start-rotation-y); // 45, -30, 45+30
+	$times: 12;
+	transform:
+		// rotateX(calc($cube-start-rotation-x + $cube-distance-between-points-x * var(--scroll-distance)))
+		rotateX(calc($cube-start-rotation-x + var(--scroll-distance) * ($desired-end-rotation-cube-x - $cube-start-rotation-x)*$times))
+		rotateY(calc($cube-start-rotation-y + var(--scroll-distance) * ($desired-end-rotation-cube-y - $cube-start-rotation-y)*$times))
+		rotateZ(0) ; //skewX(calc(var(--scroll-distance-to-deg) / 8))
+	// transform: rotateX(calc(-30deg + var(--scroll-distance-to-deg))) rotateY(calc(45deg + var(--scroll-distance-to-deg))) rotateZ(0) scaleX(calc(1 + var(--scroll-distance)));
+	margin: auto;
+	z-index: 10;
+	// animation: rotate_skew 5s linear infinite;
+	position: fixed;
+	transition: transform .5s ease-out;
+	&.zero{
+		transition: transform 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+		.face {
+			// transition: none;
+			&.bottom,&.right,&.back{
+				visibility: hidden;
+			}
+
+			&.top,&.left,&.front{
+				backface-visibility: visible;
+			}
+		}
+		&:hover {
+			// transform: rotate3d(1, 1, 1, 0) matrix3d(
+			//	 1, 1, 0,
+			//	 0, 5, 2,
+			//	 5, 0, 2,
+			//	 0, 1, 0,
+			//	 50, 100, 0, 1.5
+			//	 );
+			// transform: rotateX(46deg) rotateY(43deg) rotateZ(0) matrix3d(0,0,1.00,0,0.00,1,0.00,0,-1,0,0,0,0,0,0,1);
+			// transform: rotateX(0) rotateY(0) rotateZ(0) matrix3d(-1,0,0.00,0,0.00,1,0.00,0,0,0,-1,0,0,0,0,1);
+			// animation: cube-spin forwards 2s;
+			// &.zero{
+			transform: rotateX(30deg) rotateY(-135deg) rotateZ(0) scale(1);
+			
+			.face.front {
+				background-image: url(../../../public/logo-dot-trans.png);
+				border-color: white;
+				background-color: black;
+				transition: background-image 0s 1.17s, background-color 0s 1.17s, border-color 0s 1.17s;
+			}
+			.face.left{
+				background-color: white;
+				background-image: url(../../../public/logo-solid-trans-black.png);
+				border-color: black;
+				transition: background-image 0s 1s, background-color 0s 1s, border-color 0s 1s;
+			}
+			// }
+		}
+	}
+	&.hideface .face{
+		// transition: border-color 1s;
+		// border-color: black !important;
+		&.left,&.front{
+			// background-image: none;
+			// background-color: rgba($color: #000000, $alpha: 0.0);
+			// visibility: hidden;
+		}
+	}
+
+	.face {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		backface-visibility: inherit;
+		font-size: 60px;
+		color: black;
+		border: 6px double black;
+
+		background-color: white;
+		background-size: contain;
+
+		&.front{
+			background-color: white;
+			background-image: url(../../../public/logo-solid-trans-black.png);
+			transition: background-image 0s 0.78s, background-color 0s 0.78s, border-color 0s 0.78s;
+		}
+		&.left{
+			transition: background-image 0s 1.17s, background-color 0s 1.17s, border-color 0s 1.17s;
+		}
+		&.top, &.left{
+			border-color: white;
+			background-color: #0a0a0a;
+			background-color: black;
+			background-image: url(../../../public/logo-dot-trans.png);
+			// z-index: 11;
+		}
+
+		&.top,&.left,&.front{
+			// backface-visibility: visible;
+		}
+
+		
+		
+		&.bottom,&.right,&.back{
+			background-size: cover;
+			background-repeat: no-repeat;
+			// border: 10px solid white;
+			border: none;
+			// background-color: rgba($color: #fff, $alpha: 0.5);
+			background-color: rgba($color: #000000, $alpha: 0.0);
+			visibility: visible;
+		}
+
+		// &.back{
+		// 	border-left: 0px solid white;
+		// }
+
+		// &.bottom{
+		// 	border-right: 10px solid white;
+		// 	border-bottom: 10px solid white;
+		// }
+		// &.right {
+		// 	border-right: 10px solid white;
+		// }
+		&.back{
+			// background-image: url(../../../public/skärmabild.png);
+		}
+
+		//STANDARD
+		&.front { transform: translateZ($face); }
+		&.back { transform: rotateY(180deg) translateZ($face); }
+		&.right { transform: rotateY(90deg) translateZ($face); }
+		&.left { transform: rotateY(-90deg) translateZ($face); }
+		&.top { transform: rotateX(90deg) translateZ($face); }
+		&.bottom { transform: rotateX(-90deg) translateZ($face); }
+	}
+}
+
+@media screen and (max-width: $media-mobile-breakpoint) {
+	#cube {
+		// position: absolute;
+		// left: 50%; top: 50%;
+		// transform: translate(-50%, -50%) rotateX(-30deg) rotateY(45deg) rotateZ(0);
+		pointer-events: none;
+		z-index: -10;
+		visibility: hidden;
+	}
+}
+
+@keyframes cube-spin {
+	0%, 100%{
+		transform: rotateX(-30deg) rotateY(45deg) rotateZ(0);
+
+		
+
+
+	}
+	58.5%{
+		// .face.front{
+		// 	background-image: url(../../../public/logo-dot-trans.png);
+		// 	border-color: white;
+		// 	background-color: black;
+		// 	// transition: background-image 0s 1.17s, background-color 0s 1.17s, border-color 0s 1.17s;
+		// }
+	}
+
+	99.9%{
+		transform: rotateX(30deg) rotateY(-135deg) rotateZ(0);
+	}
+}
